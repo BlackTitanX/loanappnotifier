@@ -5,6 +5,10 @@
     "connect-fulcrum-webhook": "^1.0.1",
     "express": "^4.13.4"
   },
+	"main": "polis.js",
+	"scripts": {
+		"start": "node polis.js"
+	},
   "engines": {
     "node": "0.12.x",
     "npm": "2.10.x"
