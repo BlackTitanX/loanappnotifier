@@ -3,7 +3,9 @@
   "version": "0.0.3",
   "dependencies": {
     "connect-fulcrum-webhook": "^1.0.1",
-    "express": "^4.13.4"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "nodemailer": "^6.9.13"
   },
   "engines": {
     "node": "0.12.x",

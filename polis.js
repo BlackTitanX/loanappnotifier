@@ -1,7 +1,11 @@
 var express = require('express');
 var fulcrumMiddleware = require('connect-fulcrum-webhook');
+const email = require('./email_service/email')
 
-var PORT = process.env.PORT || 9000;
+require('dotenv').config();
+
+
+var PORT = process.env.PORT || 3000;
 
 var app = express();
 
@@ -16,6 +20,7 @@ function payloadProcessor (payload, done) {
   // tried again later.
   console.log('Payload:');
   console.log(payload);
+ 
   done()
 }
 
@@ -30,6 +35,16 @@ app.get('/', function (req, res) {
   res.send('<html><head><title>Polis.js</title></head><body><h2>polis.js</h2><p>Up and Running!</p></body></html>');
 })
 
+
+
+
 app.listen(PORT, function () {
   console.log('Listening on port ' + PORT);
+
+  if (require.main === module) {
+  email().catch(console.error);
+}
+
+  
+  
 });
