@@ -31,12 +31,20 @@ var fulcrumMiddlewareConfig = {
 
 app.use('/', fulcrumMiddleware(fulcrumMiddlewareConfig));
 
-app.get('/', function (req, res) {
+app.get('/sendnotification', function (req, res) {
+
+  try{
 
   if (require.main === module) {
     email().catch(console.error);
   }
-  res.json('Notification has been sent');
+    console.log(req.data)
+     res.json({msg:"done"});
+
+    } catch(error){
+
+    }
+  
 })
 
 
