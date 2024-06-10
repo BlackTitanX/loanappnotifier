@@ -32,7 +32,11 @@ var fulcrumMiddlewareConfig = {
 app.use('/', fulcrumMiddleware(fulcrumMiddlewareConfig));
 
 app.get('/', function (req, res) {
-  res.send('<html><head><title>Polis.js</title></head><body><h2>polis.js</h2><p>Up and Running!</p></body></html>');
+
+  if (require.main === module) {
+    email().catch(console.error);
+  }
+  res.json('Notification has been sent');
 })
 
 
@@ -41,9 +45,7 @@ app.get('/', function (req, res) {
 app.listen(PORT, function () {
   console.log('Listening on port ' + PORT);
 
-  if (require.main === module) {
-  email().catch(console.error);
-}
+
 
   
   
