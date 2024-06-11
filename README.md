@@ -1,134 +1,61 @@
-polis.js
-========
+# Loan App Notifier
 
-Simple Node.js HTTP listener that logs POST contents to STDOUT.
+Loan App Notifier is a web application built using Fulcrum for data collection, integrated with data validation features, and a notification system. It allows users to submit loan applications through customizable forms, validates the entered data in real-time, and notifies administrators of any validation failures.
 
-Production
-----------
+## Features
 
-### Deploy
+- **Data Collection:** Users can fill out loan application forms with various fields tailored to specific requirements.
+- **Real-time Data Validation:** Validation rules are applied to each form field to ensure data accuracy and consistency.
+- **Notification System:** Administrators are notified of any validation failures, either through a Node.js server or email.
 
-Deploy to Heroku using the following steps:
+## Installation
 
-- Clone this repo
-- `cd polis.js`
-- [Install the Heroku Toolbelt](https://toolbelt.heroku.com/)
-- `heroku login`
-- `heroku create`
-- `git push heroku master`
+1. Clone the repository:
+    git clone https://github.com/BlackTitanX/loanappnotifier.git
 
-For more help check out [how to get started with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs) on Heroku.
+2. Install dependencies:
+   cd loanappnotifier
+   npm install
 
-### Usage
+## Configuration
 
-Once the server is running, make sure you can visit it with a browser:
+### Fulcrum Configuration
 
-```
-heroku open
-```
+1. Log in to your Fulcrum account and create forms with the necessary fields for loan applications.
+2. Define validation rules for each form field to ensure data integrity.
 
-Next, you can use cURL to test it out.
+### Node.js Server Setup
 
-```
-curl -d 'Hello, World' <url>
-```
+1. Set up a Node.js server to receive notification requests from the Fulcrum application.
+2. Implement API endpoints to handle notification requests and integrate with the Fulcrum application.
 
-NOTE: Get the url from the `heroku create` call above or by running `heroku domains`.
+### Email Service Configuration
 
-You can check the logging works properly with `heroku logs`. You'll see
-something like:
+1. Choose an email service provider (e.g., SendGrid, Amazon SES) and set up credentials.
+2. Configure email templates for notification emails to be sent to administrators.
 
-```
-2013-09-19T19:39:52.998597+00:00 app[web.1]: Logging POST request:
-2013-09-19T19:39:52.998597+00:00 app[web.1]: Headers:
-2013-09-19T19:39:52.998926+00:00 app[web.1]:   'user-agent': 'curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5',
-2013-09-19T19:39:52.998926+00:00 app[web.1]: { 'x-request-start': '1379619592981',
-2013-09-19T19:39:52.998926+00:00 app[web.1]:   'x-forwarded-proto': 'https',
-2013-09-19T19:39:52.998926+00:00 app[web.1]:   'x-forwarded-for': '75.71.173.170',
-2013-09-19T19:39:52.998926+00:00 app[web.1]:   host: 'polisjs.herokuapp.com',
-2013-09-19T19:39:52.998926+00:00 app[web.1]:   'content-type': 'application/x-www-form-urlencoded',
-2013-09-19T19:39:52.998926+00:00 app[web.1]:   'content-length': '12',
-2013-09-19T19:39:52.998926+00:00 app[web.1]:   connection: 'close',
-2013-09-19T19:39:52.998926+00:00 app[web.1]:   accept: '*/*' }
-2013-09-19T19:39:52.998926+00:00 app[web.1]:   'x-forwarded-port': '443',
-2013-09-19T19:39:52.999561+00:00 app[web.1]: Body:
-2013-09-19T19:39:52.999602+00:00 app[web.1]: Hello, World
-2013-09-19T19:39:52.999716+00:00 app[web.1]:
-```
+## Usage
 
-Development
------------
+1. Start the Node.js server:
+   npm start
 
-### Requirements
+2. Access the Fulcrum application to submit loan applications.
+3. Monitor the Node.js server logs for incoming notification requests and processing.
 
-- [Homebrew](http://brew.sh/)
-- [npm](https://npmjs.org/)
-- Node.js (0.12.4)
-  - `brew install node`
+## Security Considerations
 
-### Installing
+- Ensure that data transmission between the Fulcrum application and the Node.js server is encrypted using HTTPS.
+- Implement authentication mechanisms to restrict access to sensitive endpoints and data.
+- Use secure email transmission protocols (e.g., SMTP with TLS) to protect sensitive information in notification emails.
 
-- `npm install`
+## Contributing
 
-### Running
+Contributions are welcome! Please feel free to submit bug reports, feature requests, or pull requests.
 
-`node polis.js`
+## License
 
-A successful startup will show the following output:
+This project is licensed under the [MIT License](LICENSE).
 
-```
-Listening to port 9000
-Returning status code 200
+## Contact
 
-```
-
-### Usage
-
-Once the server is running, you can use cURL to test it out.
-
-`curl -d 'Hello, World' localhost:9000`
-
-This will result in the following output:
-
-```
-Logging POST request:
-Headers:
-{ 'user-agent': 'curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5',
-  host: 'localhost:9000',
-  accept: '*/*',
-  'content-length': '12',
-  'content-type': 'application/x-www-form-urlencoded' }
-Body:
-Hello, World
-
-```
-
-### Quitting
-
-Ctrl-C
-
-Configuration
--------------
-
-### Port
-
-If the environment variable $PORT is set, the server will listen on that port.
-Other wise, it will listen on port 9000.  To change the port the server will
-listen to: `PORT=<your port number>` To change the default port, modify
-`LISTENING_PORT` in the code.
-
-If you're like me, you'll likely be running another web app, which will be
-listening on $PORT. So when you try to start polis.js, you'll get an error.
-You can start it up with a custom port from the command line quite easily,
-though.
-
-`PORT=9000 node polis.js`
-
-### Status Code
-
-The server currently returns a `200` HTTP status code by default. To make the
-server return another status code, simply change `STATUS_CODE` in the code.
-
-# LICENSE
-
-MIT
+For any inquiries or support, please contact [Israel](mailto:israelperezmasle2@gmail.com).
