@@ -1,13 +1,19 @@
 var express = require('express');
 var fulcrumMiddleware = require('connect-fulcrum-webhook');
 const email = require('./email_service/email')
+const cors = require('cors');
 
 require('dotenv').config();
+
 
 
 var PORT = process.env.PORT || 3000;
 
 var app = express();
+
+app.use(cors({
+  origin: '*'
+}));
 
 function payloadProcessor (payload, done) {
   // Do stuff with payload like update records in a database,
@@ -38,7 +44,7 @@ app.get('/sendnotification', function (req, res) {
   if (require.main === module) {
     email().catch(console.error);
   }
-    console.log(req.data)
+    console.log(req.params)
      res.json({msg:"done"});
 
     } catch(error){
