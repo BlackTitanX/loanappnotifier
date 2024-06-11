@@ -19,8 +19,8 @@ async function main() {
       from: '"Israel Perez" <israelperezmasle2@gmail.com>', // sender address
       to: "israelperezmasle2@gmail.com", // list of receivers
       subject: "Hello Team a New loan application has been submitted ✔", // Subject line
-      text: "Hello world?", // plain text body
-      html: "<b>Hello world?</b>", // html body
+      text: "New Application", // plain text body
+      html: emailTemplate, // html body
     });
 
     console.log("Message sent: %s", info.messageId);
@@ -29,5 +29,49 @@ async function main() {
     console.error("Error sending email:", error);
   }
 }
+
+
+
+const emailTemplate = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Application Submitted</title>
+    <style>
+        /* Styles for the email template */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1, p {
+            margin-bottom: 20px;
+        }
+        .application-details {
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>New Application Submitted</h1>
+        <p>A new application has been submitted. Please review it.</p>
+    </div>
+</body>
+</html>
+`;
 
 module.exports = main;
